@@ -288,7 +288,6 @@ async def search(
         logger.error(f"Ошибка базы данных: {e}")
         raise HTTPException(status_code=500, detail="Ошибка базы данных")
 
-<<<<<<< HEAD
 @app.get("/register", name="register")
 async def register(request: Request):
     return templates.TemplateResponse("register.html", {"request": request})
@@ -351,36 +350,3 @@ async def general_exception_handler(request: Request, exc: Exception):
 
 # Функция для удаления директорий __pycache__ (если необходимо)
 remove_pycache_dirs()
-=======
-'''
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Максимальный размер файла 16MB
-allowed_extensions = {'mp3', 'wav', 'jpg', 'png'}
-'''
-
-@app.get("/login", response_class=HTMLResponse)
-async def login(request: Request):
-    return templates.TemplateResponse("auth/login.html", {"request": request})
-
-@app.post("/login")
-async def login_post(request: Request, username: str = Form(...), password: str = Form(...)):
-    # Здесь логика авторизации
-    return templates.TemplateResponse("home.html", {"request": request})
-
-@app.get("/register", response_class=HTMLResponse)
-async def register(request: Request):
-    return templates.TemplateResponse("auth/register.html", {"request": request})
-
-@app.post("/register")
-async def register_post(request: Request, username: str = Form(...), email: str = Form(...), password: str = Form(...)):
-    # Здесь логика регистрации
-    return templates.TemplateResponse("auth/home.html", {"request": request})
-
-@app.get("/password-reset", response_class=HTMLResponse)
-async def password_reset(request: Request):
-    return templates.TemplateResponse("auth/password_reset.html", {"request": request})
-
-@app.post("/password-reset")
-async def password_reset_post(request: Request, email: str = Form(...)):
-    # Здесь логика восстановления пароля
-    return templates.TemplateResponse("home.html", {"request": request})
->>>>>>> 5b226d76a19ca7ee0b6f398c970d0a3e1558c542
