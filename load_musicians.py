@@ -1,61 +1,82 @@
 import json
-from sqlalchemy.orm import Session
-from app.database import engine
-from app.models import MediaFile
+import sqlite3
 
-# Путь к файлу JSON
-json_file_path = './zametki/musicians.json'
+# Путь к базе данных и JSON файлу
+DB_PATH = 'c:/Users/maksi/Documents/GitHub/fast_api_media_platform/media_platform.db'
+JSON_PATH = 'c:/Users/maksi/Documents/GitHub/fast_api_media_platform/zametki/musicians.json'
 
-# Функция для загрузки данных из JSON файла
-def load_data_from_json(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        return json.load(file)
+# Обязательные поля
+REQUIRED_FIELDS = ['name_music', 'file_name', 'file_path', 'category_id', 'genre_id']
 
-# Функция для записи данных в базу данных
-def save_data_to_db(data):
-    # Создаем сессию
-    session = Session(bind=engine)
+def validate_record(record):
+    """Проверка, содержит ли запись все необходимые поля с непустыми значениями, кроме file_name."""
+    for field in REQUIRED_FIELDS:
+        if field == 'file_name' and not record.get(field):
+            record['file_name'] = 'default_file_name.mp3'  # значение по умолчанию
+        elif not record.get(field):  # Проверка на наличие и непустое значение
+            print(f"Пропущено поле {field} в записи: {record}")
+            return False
+    return True
 
+def load_data_to_db():
+    # Чтение JSON файла
     try:
-        # Перебираем данные и создаем объекты MediaFile
-        for item in data:
-            media_file = MediaFile(
-                id=int(item["id"]),
-                name_music=item["name_music"],
-                description=item["description"],
-                file_name=item["file_name"] if item["file_name"] else None,
-                file_path=item["file_path"] if item["file_path"] else None,
-                cover_image_path=item["cover_image_path"] if item["cover_image_path"] else None,
-                category_id=int(item["category_id"]) if item["category_id"] else None,
-                genre_id=int(item["genre_id"]) if item["genre_id"] else None,
-                youtube_url=item["youtube_url"] if item["youtube_url"] else None,
-                rutube_url=item["rutube_url"] if item["rutube_url"] else None,
-                plvideo_url=item["plvideo_url"] if item["plvideo_url"] else None
-            )
-            # Добавляем объект в сессию
-            session.add(media_file)
-        
-        # Сохраняем изменения
-        session.commit()
-        print("Данные успешно записаны в базу данных.")
+        with open(JSON_PATH, 'r', encoding='utf-8') as f:
+            musicians_data = json.load(f)
+    except FileNotFoundError:
+        print(f"Файл JSON не найден: {JSON_PATH}")
+        return
+    except json.JSONDecodeError:
+        print("Ошибка при чтении JSON файла.")
+        return
 
-    except Exception as e:
-        session.rollback()
-        print(f"Произошла ошибка при записи данных: {e}")
-    
-    finally:
-        # Закрываем сессию
-        session.close()
+    # Подключение к базе данных SQLite
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
 
-# Основной блок программы
-if __name__ == "__main__":
-    # Загружаем данные из файла JSON
-    data = load_data_from_json(json_file_path)
+    # SQL-запрос для вставки данных
+    insert_query = """
+    INSERT INTO media_files (id, name_music, description, file_name, file_path, cover_image_path, 
+                             category_id, genre_id, youtube_url, rutube_url, plvideo_url) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """
 
-    # Сохраняем данные в базу данных
-    save_data_to_db(data)
+    # Обработка каждой записи
+    for record in musicians_data:
+        # Проверка валидности записи
+        if not validate_record(record):
+            print(f"Пропуск записи из-за отсутствующих обязательных полей: {record}")
+            continue
 
+        # Подготовка данных для вставки
+        data_tuple = (
+            record.get('id'),
+            record.get('name_music'),
+            record.get('description', ''),  # Использование пустой строки по умолчанию
+            record['file_name'],
+            record['file_path'],
+            record.get('cover_image_path', ''),
+            record['category_id'],
+            record['genre_id'],
+            record.get('youtube_url', ''),
+            record.get('rutube_url', ''),
+            record.get('plvideo_url', '')
+        )
 
+        # Вставка данных с обработкой ошибок
+        try:
+            cursor.execute(insert_query, data_tuple)
+        except sqlite3.IntegrityError as e:
+            print(f"Ошибка вставки данных: {e} для записи {record}")
+            continue
+
+    # Сохранение изменений и закрытие подключения
+    conn.commit()
+    conn.close()
+    print("Данные успешно загружены в базу данных.")
+
+# Запуск загрузки данных
+load_data_to_db()
 
 '''
 📔 Автор: Дуплей Максим Игоревич | Dupley Maxim Igorevich
