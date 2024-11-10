@@ -1,0 +1,47 @@
+[
+    {
+        "user_id": 1,
+        "name": "Конон",
+        "surname": "Соколова",
+        "patronymic": "Кузьминична",
+        "phone_number": "8 778 822 4938",
+        "email": "mitofan2002@example.org",
+        "birthday": "2001-04-05"
+    },
+    {
+        "user_id": 2,
+        "name": "Галактион",
+        "surname": "Кулагин",
+        "patronymic": "Елисеевич",
+        "phone_number": "+7 (381) 407-6017",
+        "email": "vasilevjulian@example.com",
+        "birthday": "1978-04-29"
+    },
+    {
+        "user_id": 3,
+        "name": "Майя",
+        "surname": "Гусева",
+        "patronymic": "Филатович",
+        "phone_number": "8 (410) 629-4143",
+        "email": "denisovamargarita@example.net",
+        "birthday": "1986-09-13"
+    },
+    {
+        "user_id": 4,
+        "name": "Вацлав",
+        "surname": "Комарова",
+        "patronymic": "Евстигнеевич",
+        "phone_number": "8 687 605 76 95",
+        "email": "juri_1979@example.com",
+        "birthday": "1988-03-17"
+    },
+    {
+        "user_id": 5,
+        "name": "Панкратий",
+        "surname": "Якушев",
+        "patronymic": "Ярославович",
+        "phone_number": "+7 (064) 864-3686",
+        "email": "vladimir14@example.com",
+        "birthday": "1979-03-13"
+    }
+]

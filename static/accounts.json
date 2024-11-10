@@ -1,5 +1,37 @@
 [
-    {"username": "admin", "email": "admin@example.com", "password": "admin", "role": "Admin"},
-    {"username": "user_1", "email": "user_1@example.com", "password": "user", "role": "User"},
-    {"username": "moderator", "email": "mod@example.com", "password": "moderator", "role": "Moderator"}
+    {
+        "username": "demjan_2005",
+        "email": "eremebirjukov@example.com",
+        "password_hash": "fc66079baf5945bec4d0b966d58f0717d87884d0ae0117135ec89de1207cee3e",
+        "profile_image_path": "profile_images/demjan_2005.jpg",
+        "role_id": 2
+    },
+    {
+        "username": "tkolesnikov",
+        "email": "silanti_2003@example.org",
+        "password_hash": "d87ad76932d6e4f7ba1a22a846df1849564a5910004cf4c4ae6b17a8fee8d521",
+        "profile_image_path": "profile_images/tkolesnikov.jpg",
+        "role_id": 3
+    },
+    {
+        "username": "volkovfeofan",
+        "email": "averjankomissarov@example.net",
+        "password_hash": "7b8281e1f57f61d820f25800171bed654ea9099982dc470912c71598aafea84a",
+        "profile_image_path": "profile_images/volkovfeofan.jpg",
+        "role_id": 2
+    },
+    {
+        "username": "kornil1973",
+        "email": "antonovkondrat@example.net",
+        "password_hash": "b2f11022793881c0f5d9588592ab9b74b1c150097fdab235033757bdfae568f0",
+        "profile_image_path": "profile_images/kornil1973.jpg",
+        "role_id": 2
+    },
+    {
+        "username": "panfilovleonti",
+        "email": "svetozar1991@example.net",
+        "password_hash": "8b576b48226fa421b46ebd58981b15dbbc6b2feb959a412294979b0ac1f71684",
+        "profile_image_path": "profile_images/panfilovleonti.jpg",
+        "role_id": 1
+    }
 ]

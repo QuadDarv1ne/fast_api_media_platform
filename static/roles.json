@@ -1,5 +1,14 @@
 [
-    {"name": "Admin"},
-    {"name": "User"},
-    {"name": "Moderator"}
+    {
+        "id_role": 1,
+        "name": "Admin"
+    },
+    {
+        "id_role": 2,
+        "name": "User"
+    },
+    {
+        "id_role": 3,
+        "name": "Moderator"
+    }
 ]
