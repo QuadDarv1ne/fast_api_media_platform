@@ -1,4 +1,7 @@
 # Медиа-платформа на Fast API
+
+[![DOI](https://zenodo.org/badge/883878226.svg)](https://doi.org/10.5281/zenodo.17264403)
+
 ![media](img/media_platform.png)
 
 ## Описание web-приложения
