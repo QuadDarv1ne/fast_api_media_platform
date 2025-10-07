@@ -1,6 +1,7 @@
 # Медиа-платформа на Fast API
 
 [![DOI](https://zenodo.org/badge/883878226.svg)](https://doi.org/10.5281/zenodo.17264403)
+[![ORCID](https://img.shields.io/badge/ORCID-0009--0007--7605--539X-green?logo=orcid&logoColor=white)](https://orcid.org/0009-0007-7605-539X)
 
 ![media](img/media_platform.png)
 
