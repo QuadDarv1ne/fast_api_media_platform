@@ -148,3 +148,5 @@ python .\load_musicians.py
 #### **📲 Telegram:** @quadd4rv1n7
 
 #### **📅 Дата:** 15.08.2024
+
+[![Star History Chart](https://api.star-history.com/svg?repos=QuadDarv1ne/fast_api_media_platform&type=Date)](https://star-history.com/#QuadDarv1ne/fast_api_media_platform&Date)
